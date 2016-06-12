@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript">
+    var countDown = function(targetTime, callback) {
+
+        var _second = 1000,
+            _minute = _second * 60,
+            _hour = _minute * 60,
+            _day = _hour * 24,
+            timer;
+
+        function addZero(num) {
+            if (num < 10) {
+                return '0' + num;
+            }
+            return num;
+        }
+
+        function start() {
+            var endTime = new Date(targetTime).getTime(),
+                nowTime = new Date().getTime(),
+                timeDiff = endTime - nowTime,
+                data;
+
+            if (timeDiff <= 0) {
+                clearInterval(timer);
+                if (typeof callback === 'function') {
+                    callback();
+                }
+            } else {
+                if (!timer) {
+                    timer = setInterval(start, 1000);
+                }
+            }
+
+            data = {
+                'days': Math.floor(timeDiff / _day),
+                'hours': addZero(Math.floor((timeDiff % _day) / _hour)),
+                'minutes': addZero(Math.floor((timeDiff % _hour) / _minute)),
+                'seconds': addZero(Math.floor((timeDiff % _minute) / _second))
+            }
+
+            console.log('hours:' + data.hours + ',minutes:' + data.minutes + ',seconds:' + data.seconds);
+        }
+
+        start();
+    };
+
+    countDown('2016-06-12 14:58:00', function() {
+        console.log('do something');
+    });
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
