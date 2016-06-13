@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript">
+    function GetQueryString(name) {
+        var curl = window.location.search;
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = decodeURI(curl).substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    }
+
+    alert(GetQueryString('id'));
+    alert(GetQueryString('name'));
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
