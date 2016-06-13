@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1.0">
-	<title>Document</title>
-	<script type="text/javascript" src="http://apps.bdimg.com/libs/fastclick/1.0.0/fastclick.min.js"></script>
-	<script type="text/javascript">
-		document.addEventListener('DOMContentLoaded', function() {
-	        FastClick.attach(document.body); //手机端有300毫秒延迟，fastclick库可解决
-	    }, false); 
 
-		function say(){
-			alert('HI');
-		}
-	</script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/fastclick/1.0.0/fastclick.min.js"></script>
+    <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body); //手机端有300毫秒延迟，fastclick库可解决
+    }, false);
+
+    //if jQuery
+    // $(function() {
+    //     FastClick.attach(document.body);
+    // });
+
+    function say() {
+        alert('HI');
+    }
+    </script>
 </head>
+
 <body>
-	
-	<button onClick="say()">click me</button>
+    <button onClick="say()">click me</button>
 </body>
+
 </html>
