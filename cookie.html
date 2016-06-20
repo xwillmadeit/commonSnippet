@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>cookie</title>
+	<script type="text/javascript">
+		var cookieHandle = function(){}
+
+		cookieHandle.prototype.setCookie = function(name,value,days,firstDomain){
+            var expire = new Date(),
+                name = name ? name: 'true',
+                days = days ? days: 30;
+
+            if(days<0){
+                expire.setTime(expire.getTime() - 1000);
+            }else{
+                expire.setTime(expire.getTime() + days*24*60*60*1000);
+            }
+            
+            if(firstDomain){ 
+            	//指定存入一级域名下
+                document.cookie = name + "=" + escape(value) + ";expires=" + expire.toGMTString() + ";path=/" + ";domain=wxrrd.com";
+            }else{
+            	//默认存入 domain 为 window.location.hostname
+                document.cookie = name + "=" + escape(value) + ";expires=" + expire.toGMTString();
+            }
+		}
+
+		cookieHandle.prototype.getCookie = function(name){
+            var arr,
+                reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+
+            if(arr=document.cookie.match(reg)){
+                return unescape(arr[2]);
+            }
+            else{
+                return '';
+            }
+        }
+
+        var cookieHandle = new cookieHandle();
+        if(cookieHandle.getCookie('name')==''){
+        	cookieHandle.setCookie('name','xwill',1);
+        }
+
+        console.log(cookieHandle.getCookie('name'));
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
