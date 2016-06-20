@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>getTime</title>
+    <script type="text/javascript">
+
+    var time = '2016-06-21 12:34:55';
+
+   	//统一使用该方法获得时间戳，ios safari 使用原生 getTime() 方法会返回 NaN
+    function parseTime(strDate) {
+        return new Date(strDate.replace(/-/g, '/')).getTime();
+    }
+
+    //console.log(new Date(time).getTime());
+    console.log(parseTime(time));
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
