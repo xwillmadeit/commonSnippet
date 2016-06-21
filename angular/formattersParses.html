@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>formatters and parses</title>
+</head>
+
+<body>
+    <div ng-controller="TestCtrl">
+        <input text-transform="uppercase" ng-model="text">
+        <p>{{text}}</p>
+        <button ng-click="change()">change</button>
+    </div>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript">
+    var app = angular.module('myapp', []);
+    app.controller('TestCtrl', ['$scope', function($scope) {}]);
+    app.directive('textTransform', function() {
+        var transformConfig = {
+            uppercase: function(input) {
+                return input.toUpperCase();
+            },
+            capitalize: function(input) {
+                return input.replace(
+                    /([a-zA-Z])([a-zA-Z]*)/gi,
+                    function(matched, $1, $2) {
+                        return $1.toUpperCase() + $2;
+                    });
+            },
+            lowercase: function(input) {
+                return input.toLowerCase();
+            }
+        };
+        return {
+            require: 'ngModel',
+            link: function(scope, element, iAttrs, modelCtrl) {
+                var transform = transformConfig[iAttrs.textTransform];
+                if (transform) {
+                    // $formatters 只改变 view 中的值
+                    // modelCtrl.$formatters.push(function(input) {
+                    //     return transform(input || "");
+                    // });
+
+                    // $parsers 会改变 controller 中 ng-model 的值
+                    modelCtrl.$parsers.push(function(input) {
+                        return transform(input || "");
+                    });
+
+                    element.css("text-transform", iAttrs.textTransform);
+                }
+            }
+        };
+    });
+
+    // https://alexperry.io/angularjs/2014/12/10/parsers-and-formatters-angular.html
+    </script>
+</body>
+
+</html>
