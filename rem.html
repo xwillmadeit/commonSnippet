@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    /* rem 中的 r 表示 root，一般基于 html 的 font-size，如果 html 没设置，则找 body ... 依次往上到上级元素 */
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    
+    html {
+        font-size: 12px; /* font-size 最小为12px */
+    }
+
+    body{
+    	font-size: 16px; 
+    }
+    
+    div {
+        height: 10rem; /* 10*14 = 140px;*/
+        width: 10rem;
+        font-size: 1rem;
+        background: pink;
+    }
+    </style>
+</head>
+
+<body>
+    <div>111</div>
+</body>
+
+</html>

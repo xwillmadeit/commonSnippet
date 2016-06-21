@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ngModelCtrl</title>
+</head>
+
+<body>
+    <div ng-controller="TestCtrl">
+        <div add ng-model="num"></div>
+        <p>{{num}}</p>
+        <button ng-click="get()">get</button>
+    </div>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript">
+    var app = angular.module('myapp', []);
+    app.controller('TestCtrl', ['$scope', function($scope) {
+        $scope.num = 1;
+        $scope.get = function() {
+            alert($scope.num);
+        }
+    }])
+    app.directive('add', [function() {
+        return {
+            restrict: 'A',
+            template: '<div real-add></div>',
+            link: function(scope, iElement, iAttrs) {
+
+            }
+        };
+    }]);
+    app.directive('realAdd', [function() {
+        return {
+            restrict: 'A',
+            require: '?^ngModel',
+            template: '<button>add</button>',
+            link: function(scope, iElement, iAttrs, ngModelCtrl) {
+                iElement.bind('click', function() {
+                    ngModelCtrl.$setViewValue(2);
+                });
+            }
+        };
+    }])
+    </script>
+</body>
+
+</html>
