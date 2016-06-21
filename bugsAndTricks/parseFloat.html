@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>parseFloat</title>
+	<script type="text/javascript">
+		var a = 0.1 + 0.2; 
+		if(a == 0.3){ //不会进去
+			console.log('a==0.3');
+		}
+
+		a = parseFloat(a.toFixed(1)); //取一位小数,如有两位则四舍五入
+		console.log(a == 0.3); //true
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
