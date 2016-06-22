@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ngModelCtrl</title>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <style>
+    	.has-error{
+    		border: 1px solid red;
+    	}
+    </style>
+</head>
+
+<body>
+    <div ng-controller="TestCtrl">
+        <form name="form" novalidate>
+        	<input type="text" ng-model="user.name" name="username" custom-rule ng-class="{'has-error': form.username.$invalid}">
+        	<input type="text" ng-model="user.phone">
+        	<button ng-click="save()">save</button>
+        </form>
+    </div>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript">
+    var app = angular.module('myapp', []);
+    app.controller('TestCtrl', ['$scope', function($scope) {
+    	$scope.user = {};
+    	$scope.save = function(){
+    		var form = $scope.form;
+    		if(form.username.$invalid){
+    			alert('username不可用');
+    			return false;
+    		}else{
+    			alert('username可用');	
+    		}
+    	}
+    }])
+    app.directive('customRule', [function () {
+    	return {
+    		restrict: 'A',
+    		require: 'ngModel',
+    		link: function (scope, iElement, iAttrs, ngModelCtrl) {
+    			iElement.bind('blur',function(){
+    				if(ngModelCtrl.$modelValue != 'xwill'){
+    					ngModelCtrl.$setValidity("customRule", false);
+    				}else{
+    					ngModelCtrl.$setValidity("customRule", true);
+    				}
+    			});
+    		}
+    	};
+    }])
+    </script>
+</body>
+
+</html>
